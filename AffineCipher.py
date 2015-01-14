@@ -3,7 +3,7 @@
 # Affine Cypher... Whatever THAT is
 
 
-# ''The encryption function taks in the values for a, b, and the user's message and encrypts da motha' fuckers
+# ''The encryption function takes in the values for a, b, and the user's message and encrypts da motha' fuckers
 def encrypt(a, b, mes):
     output = []                                # ''Empty list to store values in later
     for l in mes:
@@ -11,7 +11,7 @@ def encrypt(a, b, mes):
             x = ord(l.upper()) - 65       # ''Char to int             
             y = ((a * x) + b) % 26        # ''Encipher int
             c = chr((y) + 65)             # ''Int to char
-            output.append(c)              # ''Append charachter to list o
+            output.append(c)              # ''Append character to list o
         else:
             output.append(l)              # ''Appends special characters to o
     print(''.join(output))
@@ -36,11 +36,8 @@ def get_user_inputs():
         print('Encrypt')
         user_a = int(input('Please enter the first key, A, that is coprime to 26: '))
         user_b = int(input('Please enter the second key, B, between 0 and 26: '))
-        if user_b >= 26 or b < 0:
-            user_b = int(input('Please enter the second key, B, between 0 and 26: '))
-        else:
-            user_mes = input('What would you like to encrypt? ')
-            encrypt(user_a, user_b, user_mes)
+        message = input("What message would you like to encrypt? ")
+        encrypt(user_a, user_b, message)
     elif x == '2':
         print('Decrypt')
         message = input("What message would you like to encrypt? ")
@@ -54,6 +51,5 @@ def get_user_inputs():
             print('Have a nice day')
         else:
             print('Error in your input, closing program')
-
 
 get_user_inputs()
