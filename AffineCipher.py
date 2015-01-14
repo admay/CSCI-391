@@ -57,11 +57,3 @@ def get_user_inputs():
 
 
 get_user_inputs()
-'''
-def decrypt(message):
-
-    Ask the user for the two Keys, A and B (Note A must be coprime to 26)
-    Ask the user for the cipher text in all caps [Use .upper()]
-    Encrypt the message based on C = (AP + B) % 26
-    Print message in all lowercase [Use .lower()]
-'''
