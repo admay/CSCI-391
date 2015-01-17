@@ -10,7 +10,7 @@ def encrypt(a, b, mes):
             c = chr((((a * (ord(l.upper()) - 65)) + b) % 26) + 65)
             output.append(c)            
         else:
-            output.append(l)              
+            output.append(l)
     print(''.join(output))
 
 
