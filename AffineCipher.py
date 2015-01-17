@@ -24,10 +24,7 @@ def decrypt(a, b, mes):
     output = []
     for l in mes:
         if l.isalpha():
-            x = ord(l) - 65
-            y = (inverse(a) * (x - b))
-            z = y % 26
-            p = chr(z + 65)
+            p = chr(((inverse(a) * ((ord(l.upper()) - 65) - b)) % 26) + 65)
             output.append(p.lower())
         else:
             output.append(l)
@@ -48,12 +45,8 @@ def input_function(method):
 def init_function():
     x = input("Enter 1 for encrypt or 2 for decrypt: ")
     if x == '1':
-        print('Encrypt')
         input_function('1')
     elif x == '2':
-        print('Decrypt')
         input_function('2')
-    else:
-        print('There was an error with your input')
         
 init_function()
