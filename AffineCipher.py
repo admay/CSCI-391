@@ -33,7 +33,7 @@ def decrypt(a, b, mes):
 
 def input_function(method):
     user_a = int(input('Please enter the first key, A, that is coprime to 26: '))
-    user_b = int(input('Please enter the second key, B, between 0 and 26: '))
+    user_b = int(input('Please enter the second key, B, between 0 and 25: '))
     if method == '1':
         user_mes = input('What would you like to encrypt? ')
         encrypt(user_a, user_b, user_mes)
