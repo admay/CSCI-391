@@ -44,10 +44,20 @@ def brute_force(mes):
                 return 'Shibby'
 
 
+def get_key_values():
+    check = -1
+    while check == -1:
+        user_a = int(input("Enter first key: "))
+        user_b = int(input("Enter second key: "))
+        if user_a != 13 and user_a % 2 != 0:
+            if 0 < user_b < 26:
+                check = 0
+    return user_a, user_b
+
+
 # Grabs the user inputs like a boss
 def input_function(method):
-    user_a = int(input('Please enter the first key, A, that is coprime to 26: '))
-    user_b = int(input('Please enter the second key, B, between 0 and 25: '))
+    user_a, user_b = get_key_values()
     if method == '1':
         user_mes = input('What would you like to encrypt? ')
         encrypt(user_a, user_b, user_mes)
