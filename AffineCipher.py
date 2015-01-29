@@ -19,7 +19,6 @@ def encrypt(a, b, mes):
     print(''.join(output))
 
 
-
 # Calculates the multiplicative inverse of a number mod 26
 def inverse(a):
     for i in range(1, 26):
@@ -39,6 +38,7 @@ def decrypt(a, b, mes):
             output.append(p.lower())
         else:
             output.append(l)
+    print('The multiplicative inverse of A is', inverse(a))
     print(''.join(output))
 
 
@@ -51,7 +51,7 @@ def brute_force(mes):
         for b in range(26):
             decrypt(a, b, mes)
             print(a, b)
-            outcome = input("Is this message correct? Press enter to continue decrypting.")
+            outcome = input("Is this message correct? Press enter to continue decrypting: ")
             if outcome.lower() in ['y', 'yes']:
                 return 'Shibby'
 
@@ -95,6 +95,11 @@ def on_start():
     elif x == '3':
         user_mes = input('What would you like to force decrypt: ')
         brute_force(user_mes)
+    elif x.lower() in ['break', 'b']:
+        print('Later bruh.')
+    else:
+        print('Invalid command')
+        on_start()
         
 
 on_start()
