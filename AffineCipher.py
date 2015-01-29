@@ -1,7 +1,6 @@
 # Michael Zavarella
 # Project 1 for CSCI 391
 # This program implements an Affine cypher encryption or decryption
-output = []
 
 
 # Encrypts the user's plaintext message received in the get_input function.
@@ -10,12 +9,15 @@ output = []
 # encrypted, it is added to the end of the output array which is then printed as a
 # string of uppercase characters
 def encrypt(a, b, mes):
+    output = []
     for l in mes:
         if l.isalpha():             
             c = chr((((a * (ord(l.upper()) - 65)) + b) % 26) + 65)
             output.append(c)            
         else:
             output.append(l)
+    print(''.join(output))
+
 
 
 # Calculates the multiplicative inverse of a number mod 26
@@ -30,12 +32,14 @@ def inverse(a):
 # ciphertext back into plaintext. The output is created in the same way as in the
 # encrypt function.
 def decrypt(a, b, mes):
+    output = []
     for l in mes:
         if l.isalpha():
             p = chr(((inverse(a) * ((ord(l.upper()) - 65) - b)) % 26) + 65)
             output.append(p.lower())
         else:
             output.append(l)
+    print(''.join(output))
 
 
 # Decrypts an encrypted message by trying all possible combinations of a and b values.
@@ -78,7 +82,6 @@ def get_input(method):
         encrypt(user_a, user_b, user_mes)
     elif method == '2':
         decrypt(user_a, user_b, user_mes)
-    print(''.join(output))
 
 
 # Start-up function that begins by asking the user if they want to encrypt, decrypt, or brute
