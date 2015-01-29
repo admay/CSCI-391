@@ -5,6 +5,7 @@
 # Guess which letters in the cipher text go to which plaintext letters - Nuh uh.$
 # Print out guess for plaintext and ask the user if the output is correct - Easy
 # If output is correct, kill the program. If output is incorrect try a different$
+most_common_letters = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'
 
 
 def freq_analysis(message):
@@ -13,14 +14,51 @@ def freq_analysis(message):
     for l in message:
         if l in l_freq:
             l_freq[l] += 1
-    print(l_freq)
+    return l_freq
 
 
-'''
-    for i in range(26):
-        print(chr(i + 65), ':', l_freq[i])
-        i += 1
-'''
+def grab_first_item(u_list):
+    return u_list[0]
+
+
+def reorder_freq_list(message):
+    let_to_freq = freq_analysis(message)
+
+    freq_to_let = {}
+    for l in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
+        if l_freq[l] not in ordered_freq_dictionary:
+            freq_to_let[let_to_freq[l]] = [l]
+        else:
+            freq_to_let[let_to_freq[l]].append[l]
+
+    for frequency in ordered_freq_dictionary:
+        freq_to_let[frequency].sort(key=most_common_letters.find, reverse=True)
+        freq_to_let[frequency] = ''.join(freq_to_let[frequency])
+
+    frequency_pairs = list(freq_to_let.items())
+    frequency_pairs.sort(key=grab_first_item, reverse=True)
+
+    orderd_dictionary = []
+    for pair in frequency_pairs:
+        orderd_dictionary.append(pair[1])
+
+    return ''.join(orderd_dictionary)
+
+
+def common_match_score(message):
+    ordered_dictionary = reorder_freq_list(message)
+
+    match_score = 0
+
+    for com_let in most_common_letters[:6]:
+        if com_let in ordered_dictionary[:6]:
+            match_score += 1
+
+    for uncom_let in most_common_letters[-6:]:
+        if uncom_let in ordered_dictionary[-6:]:
+            match_score += 1
+
+    return match_score
 
 
 def on_start():
