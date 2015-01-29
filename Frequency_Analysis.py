@@ -58,7 +58,7 @@ def common_match_score(message):
         if uncom_let in ordered_dictionary[-6:]:
             match_score += 1
 
-    return match_score
+    print(match_score)
 
 
 def on_start():
