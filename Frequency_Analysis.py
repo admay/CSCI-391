@@ -18,14 +18,17 @@ def compare_lists(comparison_list):
 # sorted into a list of ordered pairs ('letter',number_of_occurrences) by the
 # number of occurrences.
 def freq_analysis(message):
-    frequency_list = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0, 'G': 0, 'H': 0, 'I': 0, 'J': 0, 'K': 0, 'L': 0,
+    frequency_dictionary = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0, 'G': 0, 'H': 0, 'I': 0, 'J': 0, 'K': 0, 'L': 0,
                       'M': 0, 'N': 0, 'O': 0, 'P': 0, 'Q': 0, 'R': 0, 'S': 0, 'T': 0, 'U': 0, 'V': 0, 'W': 0, 'X': 0,
                       'Y': 0, 'Z': 0}
+
     for l in message:
         if l.isalpha():
-            frequency_list[l] += 1
-    sorted_frequency_list = sorted(frequency_list.items(), key=operator.itemgetter(1), reverse=True)
-    return sorted_frequency_list
+            frequency_dictionary[l] += 1
+    sorted_frequency_dictionary = sorted(frequency_dictionary.items(), key=operator.itemgetter(1), reverse=True)
+
+    #return sorted_frequency_dictionary
+    return sorted_frequency_dictionary
     # Need to create a string of letters, similar to standard_frequencies, based on the list of pairs.
     # This string will allow for comparison between the two alphabets.
 
@@ -33,7 +36,7 @@ def freq_analysis(message):
 # Main function to get this bitch movin'
 def main():
     user_message = input("Enter your message: ")
-    compare_lists(freq_analysis(user_message.upper()))
+    # compare_lists(freq_analysis(user_message.upper()))
     print(freq_analysis(user_message.upper()))
 
 
