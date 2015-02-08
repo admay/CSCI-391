@@ -15,39 +15,42 @@ from sys import exit  # To kill the program
 ########################################################################################################################
 
 
-# Flips the c1 and c2 values
+# Flips the c1 and c2 values to try the next pair of ciphertext/plaintext letter combinations
 def flip_c1_c2(c1, c2):
     c1_f = c2  # The f stands for flipped!
     c2_f = c1
     return c1_f, c2_f
 
 
-# Decrypts the message
+# Decrypts the message based on the a and b values calculated in the calc_a_b function
 def decrypt(a, b, mes):
     output = []
     inv_a = inverse(a)
     for l in mes:
         if l.isalpha():
             p = chr(((inv_a * ((ord(l) - 65) - b)) % 26) + 65)
-            output.append(p.lower())
-    return ''.join(output)
+            output.append(p.upper())
+    return ' '.join(output)
 
 
-# This uses the c1 and c2 values to calculate the a and b values
-def calc_a_b(c1, c2,p1, p2, inv_d):
+# This uses the c1 and c2 values to calculate the a and b values that will be used for decryption
+# The check to ensure that a is coprime to 26 is in the main function, it was a little easier for me to build it into
+# that rather than here or making a separate function. I'm working on figuring out a more elegant solution for future
+# labs.
+def calc_a_b(c1, c2, p1, p2, inv_d):
     a = int((inv_d * (c1 - c2)) % 26)
     b = int((inv_d * ((p1*c2) - (p2*c1))) % 26)
     return a, b
 
 
-# Grabs the ciphertext characters to be used in the decryption process
+# Grabs the ciphertext characters that will be used to calculate the a and b values for ciphertext decryption
 def find_c1_c2(comparison_list, i, j):
     c1 = ord(comparison_list[i].upper()) - 65
     c2 = ord(comparison_list[j].upper()) - 65
     return c1, c2
 
 
-# Performs the frequency analysis on the user input.
+# Performs the frequency analysis on the ciphertext
 def freq_analysis(message):
     frequency_dictionary = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0, 'G': 0, 'H': 0, 'I': 0, 'J': 0, 'K': 0,
                             'L': 0, 'M': 0, 'N': 0, 'O': 0, 'P': 0, 'Q': 0, 'R': 0, 'S': 0, 'T': 0, 'U': 0, 'V': 0,
@@ -70,6 +73,7 @@ def inverse(x):
             return i
 
 
+# Home base
 def main():
     p1 = ord('E') - 65  # The minus 65 aligns the alphabet so that the index of A is 0 and Z is 26
     p2 = ord('T') - 65
@@ -106,4 +110,5 @@ def main():
                     print('Invalid key A')
 
 
+# Ahhhh yeeeeeeah
 main()
