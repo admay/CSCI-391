@@ -2,6 +2,7 @@
 # CSCI 391
 # Block Cipher
 
+# I use this as my bail function, it works...
 from sys import exit
 
 
@@ -27,9 +28,9 @@ def encrypt(mes, key):
     return ''.join(output)
 
 
-def remove_spaces(str):
-    str_ = str.replace(' ', '')
-    return str_
+def remove_spaces(txt):
+    txt = txt.replace(' ', '')
+    return txt
 
 
 def get_input():
