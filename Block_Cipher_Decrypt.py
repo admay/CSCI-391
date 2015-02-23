@@ -1,15 +1,50 @@
 # Michael Zavarella
 # CSCI 391
 # Block Cipher Cryptanalysis
+'''
+WSPGM HHEHM CMTGP NROVX WISCQ TXHKR VESQT IMMKW BMTKW CSTVL TGOPZ XGTKS CXHCX HSMGX WMNIA XPLVY GROWX LILNF JXTJI RIRVE XRTAX WETUS BITJM CKMCO TWSGR HIRGK PVDNI HWOHL DAIVX JVNUS JX
+'''
 
-# WSPGM HHEHM CMTGP NROVX WISCQ TXHKR VESQT IMMKW BMTKW CSTVL TGOPZ XGTKS CXHCX HSMGX WMNIA XPLVY GROWX LILNF JXTJI RIRVE XRTAX WETUS BITJM CKMCO TWSGR HIRGK PVDNI HWOHL DAIVX JVNUS JX
+'''
+Doc,
 
+I've  been having trouble with the very last bit of code. For some reason, my input statement gets skipped and I can't
+figure out why. I've commented out a few lines of code that will print out the legal keys based on the frequency
+analysis as well as decrypt the message using the keyword PEACE. You'll find that the decryption works fine, so does the
+frequency analysis. The major problem with this though, which I have no idea whatsoever how to fix, is that it takes
+FOREVER for the thing to finish. I've started to read about code efficiency and speeding up process for future programs.
+
+Thank you for being so patient, I've been working very hard to try to make this work and will keep going until I can
+figure out how to correct the last bit of code. Cryptology has always been a subject that has always interested me and
+so I am trying to make the most out of my opportunity to study it.
+
+Yours,
+
+Michael
+
+EDIT 2/22/2015 - 11:38 pm
+Doc,
+
+I think I figured out why the last input statement was being a bit picky. When I would enter the ciphertext, there
+was a line break at the end from copying and pasting it in, apparently that bothers Python.
+
+- Michael
+
+EDIT 2/22/2015 - 11:40 PM
+
+Doc,
+
+After a good amount of testing, I've come to the conclusion that the error was because of the line break at the end of
+the input. Fair warning, if there is a line break at the end of the message input, then the rest of the inputs will not
+work properly. Not sure why.
+
+- Michael
+'''
 #######################################################################################################################
 
 from operator import itemgetter  # Need this for the frequency analysis, not sure what it does...
-# from sys import exit  # To kill the program
+from sys import exit  # To kill the program
 p_comp = 'ETNORIAS'
-
 
 l_0 = []
 l_1 = []
@@ -20,17 +55,17 @@ l_4 = []
 
 def decrypt(mes, key):
     out = []
-    i = 0
-    while i < len(mes):
+    for i in range(len(mes)):
         c = ord(mes[i]) - 65
-        j = i % len(key)
-        k = ord(mes[j]) - 65
-        x = chr((c - k) + 65)
+        j = i % 5
+        k = ord(key[j].upper()) - 65
+        x = chr(((c - k) % 26) + 65)
         out.append(x)
         i += 1
-    return out
+    return ''.join(out)
 
 
+# Loads the dictionary file that is used to find the valid key words in the list of all possible key words
 def load_dictionary():
     dictionary_file = open('dictionary.txt')
     words = []
@@ -41,24 +76,17 @@ def load_dictionary():
     return words
 
 
-def check_dictionary_value(lst):
-    output = []
+# Checks the list of possible key words and removes all of those that are not English words
+def check_dictionary_value(lst_in):
+    lst_out = []
     dictionary = load_dictionary()
-    for e in lst:
+    for e in lst_in:
         if e in dictionary:
-            output.append(e)
-    return output
+            lst_out.append(e)
+    return lst_out
 
 
-def remove_doubles(lst):
-    out = []
-    for e in lst:
-        if e not in out:
-            out.append(e)
-    return out
-
-
-# Does stuff
+# Creates all possible key words
 def make_key_combinations(str_0, str_1, str_2, str_3, str_4):
     output = []
     key_guess = []
@@ -83,15 +111,14 @@ def make_key_combinations(str_0, str_1, str_2, str_3, str_4):
 
 
 def find_p_text_chars(c, p_text):
-    output = []
-    i = 0
-    while i < len(p_text):
+    out = []
+    for i in range(len(p_text)):
         k = (ord(p_comp[i]) - 65) % 26
         x = (ord(c) - 65) % 26
         p = chr(((x - k) % 26) + 65)
-        output.append(p)
+        out.append(p)
         i += 1
-    str_out = ''.join(output)
+    str_out = ''.join(out)
     return str_out
 
 
@@ -128,6 +155,7 @@ def parse_string_to_lists(string):
     return l_0, l_1, l_2, l_3, l_4
 
 
+# Removes any non-alphabetical characters and then returns a string of uppercase letters
 def fix_input(txt):
     output = []
     for l in txt:
@@ -136,8 +164,10 @@ def fix_input(txt):
     return output
 
 
+# Yeah
 def main():
     mes = fix_input(input('Enter your message: '))
+
     parse_string_to_lists(mes)
 
     comp_0 = find_p_text_chars(freq_analysis(''.join(l_0))[0], p_comp)
@@ -146,14 +176,19 @@ def main():
     comp_3 = find_p_text_chars(freq_analysis(''.join(l_3))[0], p_comp)
     comp_4 = find_p_text_chars(freq_analysis(''.join(l_4))[0], p_comp)
 
-    pos_key = remove_doubles(make_key_combinations(comp_0, comp_1, comp_2, comp_3, comp_4))
+    print(comp_0)
 
-    print(comp_0, comp_1, comp_2, comp_3, comp_4)
+    pos_keys = make_key_combinations(comp_0, comp_1, comp_2, comp_3, comp_4)
+    # print(comp_0, comp_1, comp_2, comp_3, comp_4)
 
-    print(check_dictionary_value(pos_key))
+    legal_keys = check_dictionary_value(pos_keys)
 
-    key_req = input('Enter the key word you would like to attempt: ')
-
-    decrypt(mes, key_req.upper())
+    while True:
+        for e in legal_keys:
+            print(decrypt(mes, e).lower())
+            check = input('Is this correct? ')
+            if check.lower() in ['yes', 'y']:
+                print('The keyword is', e)
+                exit()
 
 main()
