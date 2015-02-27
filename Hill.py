@@ -26,14 +26,12 @@ def decrypt(msg, key):
     out = []
     mes = char_to_int(msg)
     for i in range(int(len(mes)/2)):
-        print(i, 2*i, 2*i + 1)
         x = ((key[0][0] * mes[2*i]) + (key[0][1] * mes[2*i + 1])) % 26
         y = ((key[1][0] * mes[2*i]) + (key[1][1] * mes[2*i + 1])) % 26
         out.append(x + 65)
         out.append(y + 65)
         i += 1
-    print('Decrypt', mes, 'using', key)
-    print(out)
+    print('Decrypt', ''.join(msg), 'using', key)
     return int_to_char(out)
 
 
@@ -47,7 +45,7 @@ def encrypt(msg, key):
         out.append(x + 65)
         out.append(y + 65)
         i += 1
-    print('Encrypt', mes, 'using ', key)
+    print('Encrypt', ''.join(msg), 'using ', key)
     return int_to_char(out)
 
 
