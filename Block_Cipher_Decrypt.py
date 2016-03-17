@@ -4,42 +4,6 @@
 '''
 WSPGM HHEHM CMTGP NROVX WISCQ TXHKR VESQT IMMKW BMTKW CSTVL TGOPZ XGTKS CXHCX HSMGX WMNIA XPLVY GROWX LILNF JXTJI RIRVE XRTAX WETUS BITJM CKMCO TWSGR HIRGK PVDNI HWOHL DAIVX JVNUS JX
 '''
-
-'''
-Doc,
-
-I've  been having trouble with the very last bit of code. For some reason, my input statement gets skipped and I can't
-figure out why. I've commented out a few lines of code that will print out the legal keys based on the frequency
-analysis as well as decrypt the message using the keyword PEACE. You'll find that the decryption works fine, so does the
-frequency analysis. The major problem with this though, which I have no idea whatsoever how to fix, is that it takes
-FOREVER for the thing to finish. I've started to read about code efficiency and speeding up process for future programs.
-
-Thank you for being so patient, I've been working very hard to try to make this work and will keep going until I can
-figure out how to correct the last bit of code. Cryptology has always been a subject that has always interested me and
-so I am trying to make the most out of my opportunity to study it.
-
-Yours,
-
-Michael
-
-EDIT 2/22/2015 - 11:38 pm
-Doc,
-
-I think I figured out why the last input statement was being a bit picky. When I would enter the ciphertext, there
-was a line break at the end from copying and pasting it in, apparently that bothers Python.
-
-- Michael
-
-EDIT 2/22/2015 - 11:40 PM
-
-Doc,
-
-After a good amount of testing, I've come to the conclusion that the error was because of the line break at the end of
-the input. Fair warning, if there is a line break at the end of the message input, then the rest of the inputs will not
-work properly. Not sure why.
-
-- Michael
-'''
 #######################################################################################################################
 
 from operator import itemgetter  # Need this for the frequency analysis, not sure what it does...
